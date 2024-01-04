@@ -1,70 +1,29 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I followed the provided instructions to develop this website. Given additional time, I can enhance it further by incorporating advanced functions and refining the styling. Bootstrap was utilized for styling purposes.
+In addition to this project, I have also created the Inotebook React app, which showcases a more secure and stylish website. Furthermore, I have developed 4-5 other websites using React
 
-## Available Scripts
+About This Application
+1. Implement Login Process
+Create a form using the authentication endpoint provided by dummyjson.com to handle user authentication. Upon successful login, the server responds with an authentication token. Save this token securely, usually in a client-side storage mechanism like cookies or local storage.
 
-In the project directory, you can run:
+2. Save Login Token
+Once the user successfully logs in, the server provides an authentication token. Save this token securely for authorization purposes, typically in a client-side storage mechanism like cookies or local storage. This token will be sent in the headers of subsequent requests to authenticate the user.
 
-### `npm start`
+3. Make Home Page a Protected Route
+Set up a mechanism to check whether a user is logged in before allowing access to the Home page. If the user is not logged in, redirect them to the login page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. Fetch Products on the Home Page
+Use the provided products endpoint from dummyjson.com to fetch a list of products. Display these products on the Home page.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+5. Add a Search on the Page
+Implement a search bar on the Home page that allows users to input keywords. Use these keywords to filter and display only the products whose names match the search criteria.
 
-### `npm test`
+6. Add a Filter Option Based on Price
+Implement a filter mechanism on the Home page that allows users to set a price range. Display only the products that fall within the specified price range.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+7. Implement a Cart and Show Cart Count
+Create a shopping cart mechanism to store selected products. Display the number of items in the cart and the total amount at the top of the page. Update the cart count and total amount dynamically as users add or remove items.
 
-### `npm run build`
+8. Create an Add to Cart Button on Product Cards
+Add a button on each product card that allows users to add the product to their shopping cart. When the button is clicked, update the cart with the selected product.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
