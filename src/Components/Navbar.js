@@ -15,7 +15,7 @@ const Navbar = () => {
         <div>
             <nav className="navbar navbar-expand-lg bg-light text-dark">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="/">Ecommerce Shop</a>
+                    <h2 className="navbar-brand" style={{margin:"0 5px"}}>Ecommerce Shop</h2>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

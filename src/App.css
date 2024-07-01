@@ -22,6 +22,28 @@ body {
   pointer-events: none;
 }
 
+/* about page */
+
+.about-container{
+  box-shadow: 5px 5px 5px white inset, 5px 5px 5px white;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .about-container {
+    width: 90%;
+  }
+}
+
+/* In your App.css or a relevant CSS file */
+.search-buttons {
+  display: flex;
+  gap: 10px; /* Adjust the gap as needed */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 
 /* loginStyles.css */
 

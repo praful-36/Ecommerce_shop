@@ -8,7 +8,7 @@ const Cart = ({ cart, removeFromCart }) => {
 
   return (
     <>
-      <button type="button" className="btn btn-success mx-2" onClick={handleShow}>
+      <button type="button" className="btn btn-success mx-2" style={{textWrap:"nowrap"}}  onClick={handleShow}>
         Open Cart
       </button>
 

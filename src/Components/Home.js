@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useAuth } from '../Context/AuthContext';
 import Cart from './Cart';
 
-
 function Home() {
   const { token } = useAuth();
   const [products, setProducts] = useState([]);
@@ -13,6 +12,7 @@ function Home() {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [cart, setCart] = useState([]);
+  const [searchMade, setSearchMade] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,28 +23,22 @@ function Home() {
           },
         });
 
-        // Extract the 'products' array from the response
         const { products } = response.data || [];
-
-        setProducts(products || []);  // Ensure 'products' is an array or initialize as an empty array
-        setFilteredProducts(products || []); // Initialize filteredProducts with 'products'
+        setProducts(products || []);
+        setFilteredProducts(products || []);
       } catch (error) {
         console.error('Error fetching products', error);
       }
     };
     fetchProducts();
-    // eslint-disable-next-line
   }, [token]);
 
   const handleSearch = () => {
     const lowercaseSearchTerm = (searchTerm || '').toLowerCase().trim();
-
     const searchTermsArray = lowercaseSearchTerm.split(/\s+/);
 
     const filteredProducts = products.filter((product) => {
       const lowercaseProductTitle = (product.title || '').toLowerCase().trim();
-
-      // Check if all search terms are included in the product title
       const allTermsMatch = searchTermsArray.every((term) =>
         lowercaseProductTitle.includes(term)
       );
@@ -55,7 +49,17 @@ function Home() {
 
       return allTermsMatch && priceMatches;
     });
+
     setFilteredProducts(filteredProducts);
+    setSearchMade(true);
+  };
+
+  const handleClearSearch = () => {
+    setSearchTerm('');
+    setMinPrice('');
+    setMaxPrice('');
+    setFilteredProducts(products);
+    setSearchMade(false);
   };
 
   const addToCart = (productId) => {
@@ -65,7 +69,6 @@ function Home() {
       console.log("Adding to cart:", selectedProduct);
       setCart((prevCart) => [...prevCart, selectedProduct]);
 
-      // Show styled alert message
       const alertContainer = document.createElement("div");
       alertContainer.className = "alert-container";
       alertContainer.innerText = `${selectedProduct.title} added to cart!`;
@@ -87,44 +90,58 @@ function Home() {
   };
 
   return (
-    <div className="container mt-3">
-      <div className="row">
-      </div>
+    <div className="container" >
       <div className="d-flex mt-3 flex-lg-row flex-column">
-
         <div className="col mx-2">
-          <input type="text" className="form-control" placeholder="Search products" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search products"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-
         <div className="col mx-2">
-          <input type="number" className="form-control" placeholder="Min Price" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Min Price"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+          />
         </div>
-
         <div className="col mx-2">
-          <input type="number" className="form-control" placeholder="Max Price" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Max Price"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+          />
         </div>
-
-        <div className="col mx-2">
-          <button className="btn btn-success" onClick={handleSearch}>
+        <div className="col mx-2 search-buttons">
+          <button className="btn btn-success" style={{ textWrap: "nowrap" }} onClick={handleSearch}>
             Search
           </button>
+          {searchMade && (
+            <button className="btn btn-secondary ml-2" style={{ textWrap: "nowrap" }} onClick={handleClearSearch}>
+              Remove Search
+            </button>
+          )}
           <Cart cart={cart} removeFromCart={removeFromCart} />
         </div>
-
       </div>
 
-      <div className="row mt-3">
-  {[...Array(4)].map((_, colIndex) => (
-    <div key={colIndex} className="col-11 col-md-6 col-lg-3 my-2">
-      {Array.isArray(filteredProducts) ? (
-        filteredProducts
-          .filter((_, index) => index % 4 === colIndex)
-          .map((product) => (
-            <div key={product.id} className="card mb-3" style={{ "height": "13%" }}>
+      <div className="row mt-3" style={{ gap: "8rem" }}>
+        {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <div key={product.id} className="card col-11 col-md-6 col-lg-3 my-2">
               <img src="https://via.placeholder.com/300x200" className="card-img-top" alt={product.title} />
               <div className="card-body">
                 <h5 className="card-title">{product.title}</h5>
-                <p className="card-text" style={{ "height": "130px" }}> ${product.description ? product.description : "No Description"}</p>
+                <p className="card-text" style={{ height: '150px' }}>
+                  {product.description ? product.description : 'No Description'}
+                </p>
                 <p className="card-text">${product.price}</p>
                 <button className="btn btn-success" onClick={() => addToCart(product.id)}>
                   Add to Cart
@@ -132,17 +149,12 @@ function Home() {
               </div>
             </div>
           ))
-      ) : (
-        <p>No products to display</p>
-      )}
-    </div>
-  ))}
-</div>
-
-
+        ) : (
+          <p>No products to display</p>
+        )}
+      </div>
     </div>
   );
 }
 
 export default Home;
-

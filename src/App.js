@@ -15,7 +15,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/Ecommerce_shop">
       <Navbar/>
 
         <Routes>
